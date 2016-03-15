@@ -81,13 +81,16 @@ public class garbageCollector {
 			if(fishPool[headerPos] == 0){
 				return headerPos;
 			}
-			else if (fishPool[headerPos] > objectSize){
+			else if (fishPool[headerPos] < objectSize){
 				return findHeaderEmpty((headerPos + fishPool[headerPos]), objectSize);
 			}
 			else{
-				for(int i = headerPos + 1; i < (headerPos + fishPool[headerPos]); i++ ){
-					if(i !=0){
+				for(int i = headerPos + 1; i < (headerPos + fishPool[headerPos]); i++){
+					if(fishPool[i] !=0){
 						return findHeaderEmpty((headerPos + fishPool[headerPos]), objectSize);
+					}
+					else{
+						return headerPos;
 					}
 				}
 			}
@@ -152,7 +155,14 @@ public class garbageCollector {
 	public  void sweepFish(){
 		for(int i = 0; i < HANDLER_SIZE; i++){
 			if(handlePool[i] != null){
-				if(!handlePool[i].mark){				
+				if(!handlePool[i].mark){
+					int headerPos = handlePool[i].fishPos;
+					
+					for(int j = headerPos + 1; j < headerPos + handlePool[i].fishType.objectSize + 1; j++){
+						fishPool[j] = 0;				
+						
+					}
+					
 					handlePool[i] = null;
 				}
 			}

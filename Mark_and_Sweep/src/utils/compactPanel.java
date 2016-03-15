@@ -2,7 +2,7 @@ package utils;
 
 /**
  * Author: Alan Marsh
- * Date: 07/03/16
+ * Date: 12/03/16
  * Version: 2.1
  */
 
@@ -18,7 +18,7 @@ public class compactPanel extends JPanel {
 	private garbageCollector gc;
 	private Draw draw;
 	private int handlePoolSize, objectPoolSize;
-
+	
 	/**
 	 * Create the panel.
 	 */
@@ -29,6 +29,7 @@ public class compactPanel extends JPanel {
 		objectPoolSize = gc.POOL_SIZE;
 		draw = new Draw();
 		draw.setCanvasSize(width, height);
+		
 		
 		add(draw.getJLabel());
 	}
