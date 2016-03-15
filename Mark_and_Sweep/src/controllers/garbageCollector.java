@@ -79,6 +79,14 @@ public class garbageCollector {
 		
 		if(((POOL_SIZE - headerPos) > objectSize)){
 			if(fishPool[headerPos] == 0){
+				for(int i = headerPos + 1; i < (headerPos + objectSize); i++){
+					if(fishPool[i] !=0){
+						
+						fishPool[headerPos] = i + 1;
+						return findHeaderEmpty((headerPos + fishPool[headerPos]), objectSize);
+					}
+					
+				}
 				return headerPos;
 			}
 			else if (fishPool[headerPos] < objectSize){
